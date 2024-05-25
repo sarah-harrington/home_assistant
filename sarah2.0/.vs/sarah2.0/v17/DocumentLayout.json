@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Bryce\\Documents\\Sar\\code\\home_assist\\home_assistant\\sarah2.0\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F5BC0EAF-A32C-4C3F-8BBC-E462D5C99A0A}|sarah2.0.pyproj|C:\\Users\\Bryce\\Documents\\Sar\\code\\home_assist\\home_assistant\\sarah2.0\\sarah2.0.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F5BC0EAF-A32C-4C3F-8BBC-E462D5C99A0A}|sarah2.0.pyproj|solutionrelative:sarah2.0.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "sarah2.0.py",
+              "DocumentMoniker": "C:\\Users\\Bryce\\Documents\\Sar\\code\\home_assist\\home_assistant\\sarah2.0\\sarah2.0.py",
+              "RelativeDocumentMoniker": "sarah2.0.py",
+              "ToolTip": "C:\\Users\\Bryce\\Documents\\Sar\\code\\home_assist\\home_assistant\\sarah2.0\\sarah2.0.py",
+              "RelativeToolTip": "sarah2.0.py",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAAAEEAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-05-13T12:14:55.761Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
