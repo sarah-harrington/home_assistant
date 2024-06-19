@@ -9,88 +9,108 @@ import requests, json
 from playsound import playsound
 from googlesearch import search
 import pandas as pd
-from serpapi import GoogleSearch
+import string
 import openai
+from openai import OpenAI
 
-def assistant():
-    #time.sleep(2)
-    
-    respond("How can I help you?")
-    
-    listening = True
-    
-    while listening == True:
-        command = listen()
-        listening = responses(command)
+class Sarah:
+    def __init__(self):
+        self.getKey()
+        self.assistant()
 
-def listen():
-    rec = speerec.Recognizer()
-    
-    with speerec.Microphone() as source:
-        print("Listening for command...")
-        audio = rec.listen(source)
-        command = ""
+    def getKey(self):
+        
+        key_file = open('../../../API.txt')
 
-    try:
-        command = rec.recognize_google(audio)
-        print("Command given: ", command)
+        key_line = key_file.readline()
         
-    except speerec.UnknownValueError:
-        print("Audio was not understandable")
+        key_file.close()
         
-    except speerec.RequestError as e:
-        print("Request failed: ".format(e))
+        #print(key_line)
+        split_line = key_line.split(': ')
         
+        #print(split_line[1])
 
-    return command
+        api_key = split_line[1].rstrip()
+        
+        return api_key
 
-def respond(audioString):
-    print(audioString)
-    
-    # Convert to mp3
-    tts = gTTS(text=audioString, lang='en')
-    tts.save("speech.mp3")
-    
-    # Play audio file
-    playsound(r'speech.mp3')
-    
-    os.remove('speech.mp3')
-    
-def responses(command):
-    if "hello" in command: 
-        listening = True 
-        respond("Hi")
-    elif "what" or "how" or "where" or "when" or "who" or "why" in command:
-        listening=True
+    def assistant(self):
+        #time.sleep(2)
         
+        self.respond("How can I help you?")
         
+        listening = True
         
-        client = openai.OpenAI()
+        key = self.getKey()
         
-        prompt = [{
-            "role" : "user",
-            "content" : command
-            }]
+        print(key)
         
-        chat = client.chat.completions.create(model="gpt-3.5-turbo", messages=prompt)
+        self.client = OpenAI(api_key=key)
         
-        reply = chat.choices[0].message.content
-        response = reply
+        while listening == True:
+            command = self.listen()
+            listening = self.responses(command)
 
-        #geo_json = json.loads(geo_req.text)
-        '''
-        search = GoogleSearch({
-            'q' : command,
-            'location' : geo_json['city']
+    def listen(self, ):
+        rec = speerec.Recognizer()
+        
+        with speerec.Microphone() as source:
+            print("Listening for command...")
+            audio = rec.listen(source)
+            command = ""
+
+        try:
+            command = rec.recognize_google(audio)
+            print("Command given: ", command)
             
-            })
-          '''  
-        
-    elif "exit" in command: 
-        listening = False
-        exit()
-        
+        except speerec.UnknownValueError:
+            print("Audio was not understandable")
+            
+        except speerec.RequestError as e:
+            print("Request failed: ".format(e))
+            
 
-    return listening
-     
-assistant()
+        return command
+
+    def respond(self, audioString):
+        print(audioString)
+        
+        # Convert to mp3
+        tts = gTTS(text=audioString, lang='en')
+        tts.save("speech.mp3")
+        
+        # Play audio file
+        playsound(r'speech.mp3')
+        
+        os.remove('speech.mp3')
+        
+    def responses(self, command):
+        if "hello" in command: 
+            listening = True 
+            self.respond("Hi")
+        elif "what" or "how" or "where" or "when" or "who" or "why" in command:
+
+            listening=True
+            
+            prompt = [{
+                "role" : "user",
+                "content" : command
+                }]
+            
+            completion = self.client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages= prompt
+            )
+        
+            response = completion.choices[0].message  
+            
+        elif "exit" in command: 
+            listening = False
+            exit(0)
+            
+
+        return listening
+    
+if __name__ == "__main__":
+    sarah = Sarah()
